@@ -1,0 +1,31 @@
+/* statistics-containe */
+.statistics-container {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.stat-section {
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex: 1;
+  background-color: #f5f0e6;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-size: 150%;
+}
+
+.statistics {
+	display: flex;
+	flex-direction: column;
+  justify-content: center;
+  align-items: center;
+	gap: 30px;
+  padding: 50px 20px;
+  border-radius: 20px;
+  background-color: #fefefe;
+}

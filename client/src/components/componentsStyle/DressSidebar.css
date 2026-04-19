@@ -1,0 +1,99 @@
+.dress-sidebar {
+  width: 280px;
+  height: 100vh;
+  padding: 25px;
+  /* background: #fff; */
+  border-right: 1px solid #f1f1f1;
+  box-shadow: 4px 0 20px rgba(0,0,0,0.05);
+  overflow-y: auto;
+  position: sticky;
+  top: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+/* search */
+.dress-search {
+  width: 90%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid #929292;
+  outline: none;
+  margin-bottom: 25px;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.dress-search:focus {
+  border-color: #e8b4b8;
+  box-shadow: 0 0 0 3px rgba(232,180,184,0.15);
+}
+
+/* container */
+.filters-container {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.reset-btn {
+  display: inline-block;
+  margin: 4px;
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1px solid #eee;
+  background: #fafafa;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.reset-btn:hover {
+  background: #e8b4b8;
+  color: white;
+  border-color: #e8b4b8;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px rgba(232,180,184,0.3);
+}
+
+/* active button (optional if you add class later) */
+.reset-btn:active {
+  background: #d6336c;
+  color: white;
+  border-color: #d6336c;
+}
+
+/* filter section */
+.filter-section h4 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: #444;
+  font-weight: 600;
+}
+
+/* buttons */
+.filter-section button {
+  display: inline-block;
+  margin: 4px;
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1px solid #eee;
+  background: #fafafa;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.filter-section button:hover {
+  background: #e8b4b8;
+  color: white;
+  border-color: #e8b4b8;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 10px rgba(232,180,184,0.3);
+}
+
+/* active button (optional if you add class later) */
+.filter-section button.active {
+  background: #d6336c;
+  color: white;
+  border-color: #d6336c;
+}

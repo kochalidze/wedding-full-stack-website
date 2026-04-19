@@ -1,0 +1,121 @@
+.dress-page {
+	display: flex;
+
+}
+.content {
+  flex: 1;
+  padding: 30px;
+}
+
+
+
+/* მთავარი კონტეინერი */
+.dress-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 40px; /* მეტი სივრცე ბარათებს შორის "ჰაეროვნებისთვის" */
+    padding: 20px;
+}
+
+/* ბარათის დიზაინი */
+.dress-card {
+    position: relative;
+    background: transparent;
+    border: none; /* მოვაშოროთ ჩარჩოები */
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    cursor: pointer;
+}
+
+/* სურათის ჩარჩო - უფრო მაღალი პროპორციით */
+.image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 450px; 
+    overflow: hidden;
+    border-radius: 4px; /* მხოლოდ ოდნავ მომრგვალებული */
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(10%); /* მსუბუქი ფილტრი ეფექტისთვის */
+    transition: transform 0.8s ease, filter 0.5s ease;
+}
+
+/* Hover ეფექტი სურათზე */
+.dress-card:hover .image-wrapper img {
+    transform: scale(1.05);
+    filter: grayscale(0%);
+}
+
+/* ინფორმაციის ბლოკი */
+.card-body {
+    padding: 20px 0; /* გვერდებზე Padding აღარ გვინდა */
+    text-align: left;
+}
+
+.card-body h5 {
+    font-family: 'Playfair Display', serif; /* თუ გაქვს ეს ფონტი, ძალიან მოუხდება */
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    color: #1a1a1a;
+    font-weight: 500;
+}
+
+.description {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 12px;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ფასი და ზომა */
+.card-footer {
+    display: flex;
+    align-items: baseline;
+    gap: 15px;
+}
+
+.price {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #000;
+}
+
+.price::before {
+    content: "GEL "; /* ვამატებთ GEL-ს CSS-ით უფრო სუფთა კოდისთვის */
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+.size-tag {
+    font-size: 0.75rem;
+    color: #aaa;
+    border-left: 1px solid #ddd;
+    padding-left: 15px;
+}
+
+/* "Add to Cart" ღილაკი, რომელიც ჩნდება Hover-ზე */
+.dress-card::after {
+    content: 'ნახვა';
+    position: absolute;
+    top: 400px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #000;
+    color: #fff;
+    padding: 10px 30px;
+    font-size: 0.8rem;
+    opacity: 0;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.dress-card:hover::after {
+    top: 380px;
+    opacity: 1;
+}
