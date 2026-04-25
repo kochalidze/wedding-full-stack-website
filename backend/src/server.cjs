@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 // require('dotenv').config({ path: './.env' });
 require('dotenv').config({ path: require('path').join(__dirname, '..', '.env') });
 const app = express();
-const PORT = 8428;
+const PORT = process.env.PORT;
 
 if (!process.env.JWT_SECRET) {
 	console.warn('JWT_SECRET is not set. Using an insecure development fallback secret.');
@@ -28,6 +28,7 @@ const bookingsRoutes = require('./routes/bookings.router.cjs');
 const commentsRoutes = require('./routes/coments.router.cjs');
 const packagesRoutes = require('./routes/packages.router.cjs');
 const galleryRoutes = require('./routes/gallery.router.cjs');
+const cartRoutes = require('./routes/cart.router.cjs');
 
 //* Use routes
 app.use('/api/auth', authRoutes);
@@ -39,7 +40,11 @@ app.use('/api/bookings', bookingsRoutes);
 app.use('/api/comments', commentsRoutes);
 app.use('/api/packages', packagesRoutes);
 app.use('/api/gallery', galleryRoutes);
+app.use('/api/cart', cartRoutes);
+console.log("Cart routes loaded");
 
 app.listen(PORT, () => {
 	console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+setInterval(() => {}, 1000);

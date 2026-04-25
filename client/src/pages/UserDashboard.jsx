@@ -1,111 +1,9 @@
-// import { use, useEffect, useState } from 'react';
-// import axios from 'axios';
-// import { Link, useNavigate, useParams } from 'react-router-dom';
-// import { useAuthStore } from '../store/authStore';
-
-// import './pagesStyle/UserDashboard.css'
-
-// function UserDashboard() {
-//   const { id } = useParams();
-//   const navigate = useNavigate();
-//   const authUser = useAuthStore((s) => s.user);
-//   const isAdmin = useAuthStore((s) => s.isAdmin);
-
-//   const [user, setUser] = useState(null);
-//   const [loading, setLoading] = useState(true);
-//   const [error, setError] = useState('');
-
-//   useEffect(() => {
-//     const profileId = Number(id);
-
-//     if (!Number.isInteger(profileId)) {
-//       setError('Invalid user id');
-//       setLoading(false);
-//       return;
-//     }
-
-//     // Guard on client side as well; backend still verifies this.
-//     if (!isAdmin && authUser?.id !== profileId) {
-//       navigate(`/profile/${authUser?.id || ''}`, { replace: true });
-//       return;
-//     }
-
-//     const fetchUser = async () => {
-//       try {
-//         const res = await axios.get(`http://localhost:8428/api/users/${profileId}`, {
-//           withCredentials: true,
-//         });
-//         setUser(res.data);
-//       } catch (err) {
-//         setError(err?.response?.data?.error || 'Failed to load user');
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-
-//     fetchUser();
-//   }, [id, authUser?.id, isAdmin, navigate]);
-
-//   const updateUserInfo = async (updatedInfo) => {
-//     try {
-//       await axios.patch(`http://localhost:8428/api/users/info/${user.id}`, updatedInfo, {
-//         withCredentials: true,
-//       });
-//     } catch (err) {
-//       setError(err?.response?.data?.error || 'Failed to update user info');
-//     }
-//   }
-
-//   if (loading) return <p className="status-message">Loading...</p>;
-//   if (error) return <p className="status-message error">{error}</p>;
-//   if (!user) return <p className="status-message">User not found</p>;
-
-//   return (
-//     <div className="user-dashboard-page">
-//       <div className="dashboard-panel">
-//         <header className="dashboard-header">
-//           <div>
-//             <p className="dashboard-subtitle">პირადი პროფილი</p>
-//             <h1>{user.name}</h1>
-//           </div>
-//           <span className={`role-pill ${user.role === 'admin' ? 'role-admin' : 'role-user'}`}>
-//             {user.role === 'admin' ? 'ადმინისტრატორი' : 'მომხმარებელი'}
-//           </span>
-//         </header>
-
-//         <div className="profile-card">
-//           <button onClick={() => updateUserInfo({ name: user.name, last_name: user.last_name, email: user.email })}>
-//             შეცვლა
-//           </button>
-//           <p><strong>სახელი:</strong> {user.name}</p>
-//           <p><strong>გვარი:</strong> {user.last_name}</p>
-//           <p><strong>ელ.ფოსტა:</strong> {user.email}</p>
-//           <p><strong>სტატუსი:</strong> {user.status}</p>
-         
-//         </div>
-
-//         <div className="profile-actions">
-//           <Link to="/register" className="nav-button secondary">
-//             რეგისტრაცია
-//           </Link>
-//           <Link to="/login" className="nav-button secondary">
-//             შესვლა
-//           </Link>
-//         </div>
-//       </div>
-
-
-//     </div>
-    
-//   );
-// }
-
-// export default UserDashboard;
-
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
+
+import Cart from '../components/Cart';
 
 import './pagesStyle/UserDashboard.css';
 
@@ -220,6 +118,9 @@ function UserDashboard() {
           <div className="section-header">
             <span className="section-label">ჩემი შეკვეთები</span>
             <button className="section-link">ყველა →</button>
+          </div>
+          <div>
+            <Cart />
           </div>
           {/* TODO: map over real orders */}
           <p style={{ fontSize: 13, color: '#aaa', padding: '0.75rem 0' }}>

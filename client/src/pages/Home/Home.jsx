@@ -4,6 +4,7 @@ import HomeHeroSection from './HomeHeroSection';
 import Packages from './Packages';
 import HomeServices from './HomeServices';
 import UsersComment from './UsersComment';
+import HomeGallerySection from './HomeGallerySection';
 
 //* Hooks
 // import useInfiniteScroll from '../../hooks/useInfiniteScroll';
@@ -30,6 +31,7 @@ function Home() {
     <Packages />
     <HomeServices />
     <UsersComment />
+    <HomeGallerySection />
   </div>
   )
 }

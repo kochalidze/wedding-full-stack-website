@@ -9,6 +9,7 @@ import Dresses from './pages/Dresses'
 import UserDashboard from './pages/UserDashboard';
 import DressDashboard from './pages/DressDashboard';
 import Planning from './pages/Planning';
+import Gallery from './pages/Gallery';
 
 //* admin components
 import AdminDashboard from './pages/admin/AdminDashboard';
@@ -80,72 +81,19 @@ function App() {
         <Route path="/register" element={<Registration />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dresses" element={<Dresses />} />
+        <Route path="/gallery" element={<Gallery />} />
 
         {/* admin */}
-        <Route
-          path="/admin"
-          element={
-            isAuthenticated && isAdmin ? (
-              <AdminDashboard />
-            ) : ( 
-              <Navigate to="/login" replace />
-            )
-          }
-        />
-        <Route
-          path="/admin/dresses"
-          element={
-            isAuthenticated && isAdmin ? (
-              <AdminDressDashboard />
-            ) : (
-              <Navigate to="/login" replace />
-            )
-          }
-        />
-        <Route
-          path="/admin/packages"
-          element={
-            isAuthenticated && isAdmin ? (
-              <AdminPackages />
-            ) : (
-              <Navigate to="/login" replace />
-            )
-          }
-        />
-          <Route
-          path="/admin/gallery"
-          element={
-            isAuthenticated && isAdmin ? (
-              <AdminGallery />
-            ) : (
-              <Navigate to="/login" replace />
-            )
-          }
-        />
+        <Route path="/admin" element={isAuthenticated && isAdmin ? (<AdminDashboard />) : ( <Navigate to="/login" replace />)}/>
+        <Route path="/admin/dresses" element={isAuthenticated && isAdmin ? (<AdminDressDashboard />) : (<Navigate to="/login" replace />)}/>
+        <Route path="/admin/packages" element={isAuthenticated && isAdmin ? (<AdminPackages />) : (<Navigate to="/login" replace />)}/>
+        <Route path="/admin/gallery" element={isAuthenticated && isAdmin ? (<AdminGallery />) : (<Navigate to="/login" replace />)}/>
         {/* ____________ */}
 
-        <Route
-          path="/profile/:id"
-          element={
-            isAuthenticated ? (
-              <UserDashboard />
-            ) : (
-              <Navigate to="/login" replace />
-            )
-          }
-        />
-        <Route path='/dress/:id'
-          element={
-            <DressDashboard />
-          }
-        />
-        <Route path='/planning'
-          element={
-            <Planning />
-          }
-        />
+        <Route path="/profile/:id" element={isAuthenticated ? (<UserDashboard />) : (<Navigate to="/login" replace />)}/>
+        <Route path='/dress/:id' element={<DressDashboard />} />
+        <Route path='/planning' element={ <Planning /> } />
       </Routes>
-
       
     </div>
   );

@@ -4,6 +4,8 @@ import axios from 'axios';
 
 import { IoMdArrowRoundBack } from "react-icons/io";
 
+import AddCartButton from '../components/AddCartButton';
+
 import './pagesStyle/DressDashboard.css';
 
 function DressDashboard() {
@@ -96,7 +98,11 @@ function DressDashboard() {
             </div> */}
         </div>
 
-        <button className="add-to-cart-btn">კალათში დამატება</button> 
+        {/* <button className="add-to-cart-btn">კალათში დამატება</button>  */}
+        <AddCartButton
+            product={{ dress_id: dress.id }}
+            userId={2}
+        />
 
         <div className="details-accordion">
             <h4>დეტალები</h4>

@@ -26,25 +26,27 @@ const getMe = (req, res) => {
 };
 
 const registerUser = (req, res) => {
-    const { name, email, password } = req.body;
+    const { name, email, password } = req.body; 
+    
     try {
         const hashedPassword = bcrypt.hashSync(password, 10);
         const existingUser = db.prepare('SELECT id FROM users WHERE email = ?').get(email);
         if (existingUser) return res.status(400).json({ error: 'Email already exists' });
 
         let role = 'user';
-        if (email === 'admin@example.com') {
-            role = 'admin';
-        }
+        if (email === 'admin@example.com') role = 'admin';
 
-        const stmt = db.prepare('INSERT INTO users (name, email, password, role, created_at) VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP)');
+        const stmt = db.prepare('INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)');
         const info = stmt.run(name, email, hashedPassword, role);
+
         const createdUser = db
             .prepare('SELECT id, name, email, role, created_at FROM users WHERE id = ?')
             .get(info.lastInsertRowid);
+            
         res.status(201).json(createdUser);
     } catch (error) {
-        res.status(500).json({ error: 'Registration failed' });
+        console.error(error); 
+        res.status(500).json({ error: 'Registration failed', details: error.message });
     }
 }
 

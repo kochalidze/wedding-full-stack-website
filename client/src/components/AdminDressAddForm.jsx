@@ -151,7 +151,7 @@ function AdminDressAddForm() {
           >
             <option value="" disabled>აირჩიეთ კატეგორია</option>
             <option value="wedding">ქორწილი</option>
-            <option value="festive">ღრმელი</option>
+            <option value="festive">ფესტივალი</option>
           </select>
         </div>
 

@@ -6,12 +6,11 @@ const dbPath = path.join(__dirname, '..', 'database.db');
 
 const db = new Database(dbPath);
 
-//* Create users table
+// * ____________________Start Create users table____________________
 const createUsersTable = `
 	CREATE TABLE IF NOT EXISTS users (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		name TEXT NOT NULL,
-		last_name TEXT NOT NULL,
 		email TEXT NOT NULL UNIQUE,
 		password TEXT NOT NULL,
 		role TEXT NOT NULL DEFAULT 'user',
@@ -20,6 +19,10 @@ const createUsersTable = `
 	);
 `;
 db.exec(createUsersTable);
+// * ____________________End create users table____________________
+
+
+
 
 // Backward-compatible migration for existing databases
 const hasCreatedAt = db
@@ -31,7 +34,9 @@ if (!hasCreatedAt) {
 	db.exec("UPDATE users SET created_at = CURRENT_TIMESTAMP WHERE created_at IS NULL");
 }
 
-//* Create dresses table
+
+
+// * ____________________Start Create dresses table____________________
 const createDressTable = `
 	CREATE TABLE IF NOT EXISTS dresses (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -47,8 +52,11 @@ const createDressTable = `
 	);
 `;
 db.exec(createDressTable);
+// * ____________________End create dresses table____________________
 
-//* Create Decorations table
+
+
+// * ____________________Start Create decorations table____________________
 const createDecorationsTable = `
 	CREATE TABLE IF NOT EXISTS decorations (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -58,23 +66,11 @@ const createDecorationsTable = `
 	);
 `;
 db.exec(createDecorationsTable);
+// * ____________________End create decorations table____________________
 
-//* Create bookings table
-const createBookingsTable = `
-	CREATE TABLE IF NOT EXISTS bookings (
-		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		user_id INTEGER NOT NULL,
-		dress_id INTEGER NOT NULL,
-		decoration_id INTEGER,
-		booking_date DATE NOT NULL,
-		status TEXT DEFAULT 'pending',
-		FOREIGN KEY (user_id) REFERENCES users(id),
-		FOREIGN KEY (decoration_id) REFERENCES decorations(id),
-		FOREIGN KEY (dress_id) REFERENCES dresses(id)
-	);	
-`;
-db.exec(createBookingsTable);
 
+
+// * ____________________Create user_comments table____________________
 const usersComentsTable = `
 	CREATE TABLE IF NOT EXISTS user_comments (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -88,12 +84,10 @@ const usersComentsTable = `
 	);
 `;
 db.exec(usersComentsTable);
-
 // Migration: Add missing columns to user_comments if they don't exist
 const hasCommentAuthorName = db
 	.prepare("SELECT 1 FROM pragma_table_info('user_comments') WHERE name = 'comment_author_name'")
 	.get();
-
 if (!hasCommentAuthorName) {
 	try {
 		db.exec('ALTER TABLE user_comments ADD COLUMN comment_author_name TEXT');
@@ -103,7 +97,6 @@ if (!hasCommentAuthorName) {
 		console.log('Columns already exist or migration skipped:', error.message);
 	}
 }
-
 const userIdColumnInfo = db
 	.prepare("PRAGMA table_info('user_comments')")
 	.all()
@@ -131,9 +124,12 @@ if (userIdColumnInfo && userIdColumnInfo.notnull === 1) {
 	db.exec('ALTER TABLE user_comments_new RENAME TO user_comments;');
 	console.log('Rebuilt user_comments table with nullable user_id');
 }
+// * ____________________End Create user_comments table____________________
 
 
-//* create Packages table
+
+
+// * ____________________Start Create packages table____________________
 const createPackagesTable = `
 	CREATE TABLE IF NOT EXISTS packages (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -145,7 +141,12 @@ const createPackagesTable = `
 	);
 `;
 db.exec(createPackagesTable);
+// * ____________________End Create packages table____________________
 
+
+
+
+// * ____________________Start Create gallery table____________________
 const createGalleryTable = `
 	CREATE TABLE IF NOT EXISTS gallery (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -155,5 +156,53 @@ const createGalleryTable = `
 	);
 `;
 db.exec(createGalleryTable);
+// * ____________________End Create gallery table____________________
+
+
+
+
+// * ____________________Start Create cart table____________________
+const createCartTable = `
+CREATE TABLE IF NOT EXISTS cart (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    dress_id INTEGER,
+    decoration_id INTEGER,
+    quantity INTEGER NOT NULL DEFAULT 1,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (dress_id) REFERENCES dresses(id),
+    FOREIGN KEY (decoration_id) REFERENCES decorations(id),
+
+    CHECK (
+        (dress_id IS NOT NULL AND decoration_id IS NULL)
+        OR
+        (dress_id IS NULL AND decoration_id IS NOT NULL)
+    )
+);
+`;
+db.exec(createCartTable);
+// * ____________________End create cart table____________________
+
+
+
+// * ____________________Start Create bookings table____________________
+const createBookingsTable = `
+	CREATE TABLE IF NOT EXISTS bookings (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		user_id INTEGER NOT NULL,
+		dress_id INTEGER NOT NULL,
+		decoration_id INTEGER,
+		booking_date DATE NOT NULL,
+		status TEXT DEFAULT 'pending',
+		FOREIGN KEY (user_id) REFERENCES users(id),
+		FOREIGN KEY (decoration_id) REFERENCES decorations(id),
+		FOREIGN KEY (dress_id) REFERENCES dresses(id)
+	);	
+`;
+db.exec(createBookingsTable);
+// * ____________________End Create bookings table____________________
+
 
 module.exports = db;

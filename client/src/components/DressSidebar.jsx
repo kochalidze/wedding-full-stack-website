@@ -37,7 +37,6 @@ function DressSidebar() {
 				{/* color */}
 				<div className="filter-section">
 					<h4>ფერი</h4>
-					
 					<button onClick={() => setColor('red')}>წითელი</button>
 					<button onClick={() => setColor('black')}>შავი</button>
 					<button onClick={() => setColor('white')}>თეთრი</button>
@@ -60,7 +59,7 @@ function DressSidebar() {
 					<button onClick={() => setSize('2XL')}>2XL</button>
 				</div>
 
-				{/* catefory */}
+				{/* category */}
 				<div className="filter-section">
 					<h4>კატეგორია</h4>
 					<button onClick={() => setCategory('wedding')}>საქორწინო</button>

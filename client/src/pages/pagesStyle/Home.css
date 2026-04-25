@@ -959,129 +959,240 @@
 
 
 /* Packages */
-.packages-containe {
-  width: 100%;
-  background: linear-gradient(135deg, #fff5f8 0%, #fef7f0 100%);
-  padding: 80px 20px;
-  font-family: 'Georgia', serif;
+.packages-container {
+  background: #fdf9f5;
+  padding: 4rem 2rem;
 }
+
 .wedding-packages {
-  max-width: 1200px;
+  max-width: 960px;
   margin: 0 auto;
 }
-/* ===== ROW LAYOUT ===== */
-.packages-grid {
+
+/* Header */
+.packages-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.packages-header h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  font-weight: 300;
+  font-style: italic;
+  color: #2c2118;
+  margin: 0 0 0.75rem;
+}
+
+.packages-header-divider {
   display: flex;
+  align-items: center;
   justify-content: center;
-  align-items: stretch;
-  gap: 0; /* overlap-ისთვის */
-  overflow-x: auto;
-  padding: 40px 0;
+  gap: 10px;
+  margin: 1rem 0;
 }
 
-/* ===== CARD ===== */
+.packages-header-divider-line {
+  width: 60px;
+  height: 0.5px;
+  background: #c9a97a;
+}
+
+.packages-header-divider-diamond {
+  width: 5px;
+  height: 5px;
+  background: #c9a97a;
+  transform: rotate(45deg);
+}
+
+.packages-header p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  color: #8a7060;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Grid */
+.packages-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+/* Card */
 .package-card {
-  min-width: 280px;
-  max-width: 320px;
-  flex: 0 0 auto;
-
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(12px);
-
-  border-radius: 24px;
-  padding: 30px;
-
-  min-height: 380px; /* 👉 დაგრძელებული */
-
-  border: 1px solid rgba(255, 192, 203, 0.3);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-
-  position: relative;
-  transition: 0.4s;
-}
-
-/* 👉 overlap effect */
-.package-card:not(:first-child) {
-  margin-left: -80px;
-}
-
-/* depth effect */
-.package-card:nth-child(2) {
-  transform: scale(0.96);
-  z-index: 2;
-}
-
-.package-card:nth-child(3) {
-  transform: scale(0.92);
-  z-index: 1;
-}
-
-.package-card:nth-child(4) {
-  transform: scale(0.88);
-  z-index: 0;
-}
-
-/* HOVER → წინ ამოდის */
-.package-card:hover {
-  transform: scale(1.08) translateY(-10px) !important;
-  z-index: 10;
-}
-
-/* ===== CONTENT ===== */
-.package-top {
+  background: #fff;
+  border: 0.5px solid #e4d5c2;
+  border-radius: 2px;
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 15px;
+  flex-direction: column;
+  position: relative;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.package-card:hover {
+  transform: translateY(-4px);
+  border-color: #c9a97a;
+}
+
+.package-card.featured {
+  border-color: #c9a97a;
+  border-width: 1px;
+}
+
+.package-featured-badge {
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2c2118;
+  color: #c9a97a;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 8px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  white-space: nowrap;
+}
+
+.package-top {
+  padding: 2rem 1.5rem 1.25rem;
+  border-bottom: 0.5px solid #f0e6d8;
+  text-align: center;
 }
 
 .package-name {
-  font-size: 22px;
-  font-weight: 700;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 300;
+  font-style: italic;
+  color: #2c2118;
+  margin: 0 0 0.75rem;
+}
+
+.package-price-wrap {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 3px;
 }
 
 .package-price {
-  font-size: 20px;
-  font-weight: bold;
-  color: #e63946;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 38px;
+  font-weight: 300;
+  color: #2c2118;
+  margin: 0;
+  line-height: 1;
+}
+
+.package-currency {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: #b8956a;
 }
 
 .package-description {
-  font-size: 15px;
-  margin-bottom: 20px;
-  line-height: 1.6;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 300;
+  color: #8a7060;
+  line-height: 1.7;
+  padding: 1.25rem 1.5rem 0;
+  margin: 0;
+  letter-spacing: 0.03em;
 }
 
-/* ===== BUTTON ===== */
+/* Features */
+.package-features {
+  list-style: none;
+  padding: 1rem 1.5rem;
+  margin: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.package-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 300;
+  color: #4a3828;
+  line-height: 1.5;
+}
+
+.feature-check {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* Button */
 .package-btn {
-  margin-top: auto;
-  width: 100%;
-  padding: 12px;
-  border-radius: 12px;
-  border: none;
-  background: linear-gradient(135deg, #ff758c, #ff7eb3);
-  color: white;
-  font-weight: 600;
+  margin: 0 1.5rem 1.5rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #8a6040;
+  background: transparent;
+  border: 0.5px solid #c9a97a;
+  padding: 0.85rem 1rem;
   cursor: pointer;
-  transition: 0.3s;
+  border-radius: 0;
+  transition: all 0.25s ease;
 }
 
 .package-btn:hover {
-  transform: scale(1.05);
+  background: #2c2118;
+  color: #c9a97a;
+  border-color: #2c2118;
 }
 
-/* ===== SCROLLBAR BEAUTY ===== */
-.packages-grid::-webkit-scrollbar {
-  height: 8px;
+.package-btn:active { transform: scale(0.97); }
+
+.package-card.featured .package-btn {
+  background: #2c2118;
+  color: #c9a97a;
+  border-color: #2c2118;
 }
 
-.packages-grid::-webkit-scrollbar-thumb {
-  background: #ff7eb3;
-  border-radius: 10px;
+.package-card.featured .package-btn:hover {
+  background: #c9a97a;
+  color: #2c2118;
+  border-color: #c9a97a;
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-  .package-card:not(:first-child) {
-    margin-left: -50px;
-  }
+/* States */
+.no-packages {
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 300;
+  color: #b8956a;
+  padding: 3rem 0;
+}
+
+.packages-loading {
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #b8956a;
+  padding: 3rem 0;
 }

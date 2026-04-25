@@ -29,18 +29,29 @@ function Registration() {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleRegister = async (e) => {
-    e.preventDefault();
-    clearError();
-    clearMessage();
+const handleRegister = async (e) => {
+  e.preventDefault();
+  clearError();
+  clearMessage();
 
-    try {
-      await register(form);
-      setForm({ name: '', email: '', password: '' });
-    } catch {
-      // შეცდომა store-ში უკვე ინახება
-    }
-  };
+  // მომხმარებლის შეყვანილი ტექსტის გაყოფა (მაგ: "ნიკა ბერიძე" -> ["ნიკა", "ბერიძე"])
+  const nameParts = form.name.trim().split(' ');
+  const firstName = nameParts[0];
+  const lastName = nameParts.slice(1).join(' ') || '—'; // თუ გვარი არ ჩაწერა, დააყენებს ტირეს
+
+  try {
+    // ვაგზავნით დაშლილ მონაცემებს ბექენდში
+    await register({ 
+      name: firstName, 
+      // last_name: lastName, // ეს უნდა ემთხვეოდეს ბაზის სვეტს
+      email: form.email, 
+      password: form.password 
+    });
+    setForm({ name: '', email: '', password: '' });
+  } catch (err) {
+    console.error(err);
+  }
+};
 
   return (
     <div className="register-page">
